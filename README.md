@@ -1,2 +1,2 @@
 # netzfeger
-netzfeger - automated dns blacklisting with unbound
+netzfeger - automated DNS blacklisting with unbound
