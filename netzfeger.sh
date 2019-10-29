@@ -350,7 +350,7 @@ function install_webserver {
 
 	if [ ! -f "$source_dir"/confs/netzfeger_apache.html ]
 	then
-		current_dir="$temp_dir"
+		current_dir="$temp_dir"/confs
 
 		wget --retry-on-host-error -P "$current_dir"/ $git_raw_url/confs/netzfeger_apache.html
 		wget --retry-on-host-error -P "$current_dir"/ $git_raw_url/confs/netzfeger_apache_vhost.conf
@@ -677,9 +677,17 @@ function dl_blacklists {
 	install_preq parallel
 	create_tempdir	
 
+	if [ ! -f "$source_dir"/confs/blocklist-collection_example.txt ]
+	then
+		current_dir="$temp_dir"/confs
+		wget --retry-on-host-error -P "$current_dir"/ $git_raw_url/confs//blocklist-collection_example.txt
+	else
+		current_dir=$source_dir
+	fi
+
 	if [[ ! "${dl_list[0]}" =~ $link_pattern ]] || [ ! -f "${dl_list[0]}" ]
 	then
-		dl_list=("$(cat "$source_dir"/confs/blocklist-collection_example.txt)")
+		dl_list=("$(cat "$current_dir"/confs/blocklist-collection_example.txt)")
 		echo -e "\n"
 		echo -E "=============================================================================="
 		echo -E "The example blocklist-collection (from firebog.net) was used!"
@@ -1028,7 +1036,18 @@ function alter_unbound_conf_std {
 		sudo mkdir -p /etc/systemd/system/unbound.service.d
 	fi
 
-	sudo cp "$source_dir"/confs/netzfeger_systemd_unbound_service.conf /etc/systemd/system/unbound.service.d/netzfeger_systemd_unbound_service.conf
+	if  [ ! -f "$source_dir"/confs/netzfeger_systemd_unbound_service.conf ]
+	then
+		current_dir="$temp_dir"/confs
+		
+                wget --retry-on-host-error -P "$current_dir"/ "$git_raw_url"/confs/netzfeger_systemd_unbound_service.conf
+                wget --retry-on-host-error -P "$current_dir"/ "$git_raw_url"/confs/restart_service_for_unbound.service
+	
+	else
+		 current_dir="$source_dir"
+	fi
+	
+	sudo cp "$current_dir"/confs/netzfeger_systemd_unbound_service.conf /etc/systemd/system/unbound.service.d/netzfeger_systemd_unbound_service.conf
 
 
 
@@ -1078,7 +1097,7 @@ EOF
 				sudo touch /root/bin/restart_service_for_unbound.sh
 				sudo chmod +x /root/bin/restart_service_for_unbound.sh
 				echo -E "systemctl restart unbound" | sudo tee -a /root/bin/restart_service_for_unbound.sh
-				sudo cp "$source_dir"/confs/restart_service_for_unbound.service /lib/systemd/system/
+				sudo cp "$current_dir"/confs/restart_service_for_unbound.service /lib/systemd/system/
 				sudo systemctl enable restart_service_for_unbound.service
 			fi
 		else
@@ -1087,7 +1106,7 @@ EOF
 				sudo touch /root/bin/restart_service_for_unbound.sh
 				sudo chmod +x /root/bin/restart_service_for_unbound.sh
 				echo -E "systemctl restart unbound" | sudo tee -a /root/bin/restart_service_for_unbound.sh
-				sudo cp "$source_dir"/confs/restart_service_for_unbound.service /lib/systemd/system/
+				sudo cp "$current_dir"/confs/restart_service_for_unbound.service /lib/systemd/system/
 				sudo systemctl enable restart_service_for_unbound.service
 		fi
 
