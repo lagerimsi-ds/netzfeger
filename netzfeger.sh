@@ -794,6 +794,7 @@ function create_unbound_blacklist {
 
 		echo "server:" | sudo tee  "$unbound_blacklist"
 
+		# test if webserver is reachable and set ip in blacklist by result 
 		if wget --spider --force-html --connect-timeout=1 -t 1 $ip 
 		then
 			ip_list="$ip"
