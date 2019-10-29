@@ -354,15 +354,16 @@ function install_webserver {
 
 		wget --retry-on-host-error -P "$current_dir"/ $git_raw_url/confs/netzfeger_apache.html
 		wget --retry-on-host-error -P "$current_dir"/ $git_raw_url/confs/netzfeger_apache_vhost.conf
-	        sudo cp "$current_dir"/confs/netzfeger_apache.html "$www_document_root"/netzfeger/index.html
-	        sudo cp "$current_dir"/confs/netzfeger_stop.png "$www_document_root"/netzfeger/netzfeger_stop.png
-     	        sudo cp "$current_dir"/confs/netzfeger_apache_vhost.conf /etc/apache2/sites-available/
+		wget --retry-on-host-error -P "$current_dir"/ $git_raw_url/confs/netzfeger_stop.png
+		
 	else
-		sudo cp "$source_dir"/confs/netzfeger_apache.html "$www_document_root"/netzfeger/index.html
-	        sudo cp "$source_dir"/confs/netzfeger_stop.png "$www_document_root"/netzfeger/netzfeger_stop.png
-		sudo cp "$source_dir"/confs/netzfeger_apache_vhost.conf /etc/apache2/sites-available/
+
+		current_dir=$source_dir
 
 	fi
+	sudo cp "$current_dir"/confs/netzfeger_apache.html "$www_document_root"/netzfeger/index.html
+	sudo cp "$current_dir"/confs/netzfeger_stop.png "$www_document_root"/netzfeger/netzfeger_stop.png
+     	sudo cp "$current_dir"/confs/netzfeger_apache_vhost.conf /etc/apache2/sites-available/
 	sudo a2enmod ssl
 	sudo a2dissite 000-default
 	sudo a2ensite netzfeger_apache_vhost
