@@ -359,7 +359,7 @@ function install_webserver {
      	        sudo cp "$current_dir"/confs/netzfeger_apache_vhost.conf /etc/apache2/sites-available/
 	else
 		sudo cp "$source_dir"/confs/netzfeger_apache.html "$www_document_root"/netzfeger/index.html
-	        sudo cp "$current_dir"/confs/netzfeger_stop.png "$www_document_root"/netzfeger/netzfeger_stop.png
+	        sudo cp "$source_dir"/confs/netzfeger_stop.png "$www_document_root"/netzfeger/netzfeger_stop.png
 		sudo cp "$source_dir"/confs/netzfeger_apache_vhost.conf /etc/apache2/sites-available/
 
 	fi
