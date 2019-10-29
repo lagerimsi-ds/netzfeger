@@ -686,6 +686,7 @@ function dl_blacklists {
 		echo -E "Be aware that some of thereby included blocklists may not be free for commercial use."
 		echo -E "=============================================================================="
 		echo -e "\n"
+		sleep 10
 	fi
 
 
