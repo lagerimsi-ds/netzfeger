@@ -794,8 +794,15 @@ function create_unbound_blacklist {
 
 		echo "server:" | sudo tee  "$unbound_blacklist"
 
+		if wget --spider --force-html --connect-timeout=1 -t 1 $ip 
+		then
+			ip_list="$ip"
+		else
+			ip_list="127.0.0.1"
+		fi
 
-		awk '{ print "local-zone: \"" $1 "\" redirect\nlocal-data: \"" $1 " A 127.0.0.1\"" }' "$unbound_blacklist_tmp" | sort -r | uniq | sudo tee -a "$unbound_blacklist"
+
+		awk -v iptoset=$ip_list 'BEGIN { print "local-zone: \"" $1 "\" redirect\nlocal-data: \"" $1 " A "iptoset"\"" }' "$unbound_blacklist_tmp" | sort -r | uniq | sudo tee -a "$unbound_blacklist"
 	
 		apply_whitelist
 		
