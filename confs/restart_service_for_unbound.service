@@ -1,0 +1,12 @@
+[Unit]
+Description=Restart service for unbound
+After=network.target
+After=systemd-user-sessions.service
+After=network-online.target
+
+
+[Service]
+ExecStart=/root/bin/restart_service_for_unbound.sh
+
+[Install]
+WantedBy=multi-user.target

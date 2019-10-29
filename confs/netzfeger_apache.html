@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="netzfeger" content="width=device-width, initial-scale=1.0">
+		<title>Blocked site!</title>
+	</head>
+	<body>
+    		<p><img src="netzfeger_stop.png" alt="blocked_picture"></p>
+		<p id="root"></p>
+		<script type="text/javascript">
+			document.getElementById("root").innerHTML = "This site was blocked by netzfegers' unbound blocklist.<br><br> To set it on the whitelist use the following command on the CLI:<br> <b>netzfeger.sh -a </b>" + window.location.href.replace("https://", "").replace("http://", "").replace("/", "").bold();
+	  	</script>
+	</head>
+  	</body>
+</html>
+
