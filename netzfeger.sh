@@ -595,6 +595,9 @@ function recover_list {
 			if [ "$par_follow" = "list" ]
 			then
 				recover "$unbound_whitelist" list
+				echo -e "\n"
+				echo "For consistency also the blacklist has to be recovered:"
+				echo -e "\n"
 				recover "$unbound_blacklist" list
 			else
 				recover "$unbound_whitelist"
