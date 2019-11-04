@@ -634,8 +634,8 @@ function recover_list {
 		else
 			echo -e "\n"
 			echo -E "=============================================================================="
-			echo "recover takes four parameters:"
-			echo "blacklist, whitelist, forwarders, server"
+			echo -E "recover takes four parameters:"
+			echo -E "blacklist, whitelist, forwarders, server"
 			echo -E "=============================================================================="
 			echo -e "\n"
 		fi
@@ -824,6 +824,8 @@ function create_unbound_blacklist {
 function apply_whitelist {
 	# remove the entries in the whitelist from the blocklist aka apply an existing whitelist to the blocklist
 	# used by add_unbound_whitelist() and 
+	
+	install_preq parallel
 	
 	if [ -f "$unbound_whitelist" ]
 	then
