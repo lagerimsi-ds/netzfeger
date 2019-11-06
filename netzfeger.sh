@@ -716,7 +716,7 @@ function dl_blacklists {
 		else
 			
 			echo -e "\n"
-			echo -E "No file or URL specified."
+			echo -E "No file or http(s)/ftp(s)-link specified: $par"
 			echo -e "\n"
 		fi
 	done
@@ -882,7 +882,7 @@ function add_unbound_whitelist {
                                 echo -E "$arg"  | tee -a "$unbound_whitelist_tmp"
 			else
 				echo -e "\n"
-				echo "No file or URL specified."
+				echo "No file or hostname specified: $arg"
 				echo -e "\n"
 				exit 1
                         fi
@@ -928,7 +928,7 @@ function add_unbound_whitelist {
                 	        echo -E "$arg"  | sudo tee -a "$unbound_whitelist_tmp"
 			else
 				echo -e "\n"
-				echo "No file or URL specified."
+				echo "No file or hostname specified: $arg"
 				echo -e "\n"
 				exit 1
                 	fi
@@ -990,7 +990,7 @@ function add_unbound_blacklist {
                 	echo -E "$arg" | tee -a "$unbound_blacklist_tmp"
 		else
 			echo -e "\n"
-			echo "No file or URL specified."
+			echo "No file or hostname specified: $arg"
 			echo -e "\n"
 			exit 1
                 fi
@@ -1617,7 +1617,7 @@ do
 				else
 					echo -e "\n"
 					echo -E "=============================================================================="
-					echo -E "No link to a file or http(s)/ftp(s)-link to some list or list file given: $2"
+					echo -E "No file or http(s)/ftp(s)-link to some list or list file given: $2"
 					echo -E "=============================================================================="
 					echo -e "\n"
 					break
@@ -1677,7 +1677,7 @@ do
 				else				
 					echo -e "\n"
 					echo -E "=============================================================================="
-					echo -E "No URL or IPv4 or IPv6 given! to remove from forwarders list"
+					echo -E "No hostname or IPv4 or IPv6 given to remove from forwarders list!"
 					echo -E "=============================================================================="
 					echo -e "\n"
 					exit 1
@@ -1708,7 +1708,7 @@ do
 				else
 					echo -e "\n"
 					echo -E "=============================================================================="
-					echo -E "No link to a file or URL to some list or list file given: $2"
+					echo -E "No file or http(s)/ftp(s)-link to some list or list file given: $2"
 					echo -E "=============================================================================="
 					echo -e "\n"
 					exit 1
@@ -1832,7 +1832,7 @@ do
 				else
 					echo -e "\n"
 					echo -E "=============================================================================="
-					echo -E "No link to a file or URL to some list or list file given: $2"
+					echo -E "No file or http(s)/ftp(s)-link to some list or list file given: $2"
 					echo -E "=============================================================================="
 					echo -e "\n"
 					break
