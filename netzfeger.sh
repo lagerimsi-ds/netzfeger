@@ -235,7 +235,7 @@ function show_help  {
 	echo -E "--set-packet-install-cmd					set package system install command"
 	echo -E "--set-unbound-restart-cmd					set init sytsem restart commmand for unbound"
 	echo -E "--set-unbound-reload-cmd					set init sytsem reload commmand for unbound"
-	exit 1
+	exit 0
 }
 
 
@@ -1541,8 +1541,19 @@ do
 			whitelist_entry=()
 			while ! [[ $2 =~ ^-.* ]] && [[ $# -gt 1 ]]
 			do
-				whitelist_entry+=("$2")
-				shift
+				if [[ "$2" =~ $url_pattern ]]
+				then
+					whitelist_entry+=("$2")
+					shift
+				else
+					echo -e "\n"
+                                        echo -E "=============================================================================="
+                                        echo -E "No hostname (in format: *.domain.tld) given: $2"
+                                        echo -E "=============================================================================="
+                                        echo -e "\n"
+                                        break
+				fi
+
 			done
 			add_unbound_whitelist
 			shift		        
@@ -1552,10 +1563,19 @@ do
 			blacklist_entry=()
 			while ! [[ $2 =~ ^-.* ]] && [[ $# -gt 1 ]]
 			do
-				blacklist_entry+=("$2")
-				shift
+				if [[ "$2" =~ $url_pattern ]]
+				then
+					blacklist_entry+=("$2")
+					shift
+				else
+					echo -e "\n"
+                                        echo -E "=============================================================================="
+                                        echo -E "No hostname (in format: *.domain.tld) given: $2"
+                                        echo -E "=============================================================================="
+                                        echo -e "\n"
+					break
+				fi
 			done
-			echo -E "$blacklist_entry"
 			add_unbound_blacklist
 			shift		        
 	        	;;
@@ -1597,7 +1617,7 @@ do
 				else
 					echo -e "\n"
 					echo -E "=============================================================================="
-					echo -E "No link to a file or URL to some list or list file given: $2"
+					echo -E "No link to a file or http(s)/ftp(s)-link to some list or list file given: $2"
 					echo -E "=============================================================================="
 					echo -e "\n"
 					break
@@ -1637,6 +1657,7 @@ do
 					echo -E "Example: '192.168.1.15 local-dnssec-server 853'"
 					echo -E "=============================================================================="
 					echo -e "\n"
+					exit 1
 				fi
 
 			done
@@ -1653,13 +1674,13 @@ do
 				then
 					forwarders_remove+=("$2")
 					shift
-				else
-				
+				else				
 					echo -e "\n"
 					echo -E "=============================================================================="
-					echo -E "No URL or IPv4 or IPv6 given!"
+					echo -E "No URL or IPv4 or IPv6 given! to remove from forwarders list"
 					echo -E "=============================================================================="
 					echo -e "\n"
+					exit 1
 				fi
 			done
 			delete_unbound_conf_forwarders
@@ -1690,7 +1711,7 @@ do
 					echo -E "No link to a file or URL to some list or list file given: $2"
 					echo -E "=============================================================================="
 					echo -e "\n"
-					break
+					exit 1
 				fi
 				shift
 			done
@@ -1742,6 +1763,7 @@ do
                                 temp_dir="$2"
                         else
 				echo -E "No path for temp directory given!"
+				exit 1
 			fi
 			shift 2
 			;;
@@ -1781,6 +1803,7 @@ do
 					echo -E "Example: '192.168.1.15 local-dnssec-server 853'"
 					echo -E "=============================================================================="
 					echo -e "\n"
+					exit 1
 				fi
 
 			done
@@ -1910,9 +1933,9 @@ do
 			then
 				echo -e "\n"
 				echo -E "=============================================================================="
-				read -p "Is the given command correct - please check again! ${cmd[*]} [n]" answer
+				read -p "Is the given command correct? - please check again! ${cmd[*]} [y]" answer
 				echo -E "=============================================================================="
-				if [ "$answer" = "y" ]
+				if [ "$answer" = "n" ]
 				then
 					packet_search="${cmd[*]}"
 				else
@@ -1939,9 +1962,9 @@ do
 			then
 				echo -e "\n"
 				echo -E "=============================================================================="
-				read -p "Is the given command correct - please check again! ${cmd[*]} [n]" answer
+				read -p "Is the given command correct? - please check again! ${cmd[*]} [y]" answer
 				echo -E "=============================================================================="
-				if [ "$answer" = "y" ]
+				if [ "$answer" = "n" ]
 				then
 					installer="${cmd[*]}" 
 				else
@@ -1968,9 +1991,9 @@ do
 			then
 				echo -e "\n"
 				echo -E "=============================================================================="
-				read -p "Is the given command correct - please check again! ${cmd[*]} [n]" answer
+				read -p "Is the given command correct? - please check again! ${cmd[*]} [y]" answer
 				echo -E "=============================================================================="
-				if [ "$answer" = "y" ]
+				if [ "$answer" = "n" ]
 				then
 					installer="${cmd[*]}" 
 				else
@@ -1997,9 +2020,9 @@ do
 			then
 				echo -e "\n"
 				echo -E "=============================================================================="
-				read -p "Is the given command correct - please check again! ${cmd[*]} [n]" answer
+				read -p "Is the given command correct? - please check again! ${cmd[*]} [y]" answer
 				echo -E "=============================================================================="
-				if [ "$answer" = "y" ]
+				if [ "$answer" = "n" ]
 				then
 					installer="${cmd[*]}" 
 				else
