@@ -152,8 +152,6 @@ then
   interactive=yes
 fi
 
-prequisites=""
-
 
 
 ####
@@ -1933,9 +1931,9 @@ do
 			then
 				echo -e "\n"
 				echo -E "=============================================================================="
-				read -p "Is the given command correct? - please check again! ${cmd[*]} [y]" answer
+				read -p "Is the given command correct? - please check again! ${cmd[*]} [n]" answer
 				echo -E "=============================================================================="
-				if [ "$answer" = "n" ]
+				if [ "$answer" = "y" ]
 				then
 					packet_search="${cmd[*]}"
 				else
@@ -1962,9 +1960,9 @@ do
 			then
 				echo -e "\n"
 				echo -E "=============================================================================="
-				read -p "Is the given command correct? - please check again! ${cmd[*]} [y]" answer
+				read -p "Is the given command correct? - please check again! ${cmd[*]} [n]" answer
 				echo -E "=============================================================================="
-				if [ "$answer" = "n" ]
+				if [ "$answer" = "y" ]
 				then
 					installer="${cmd[*]}" 
 				else
@@ -1991,9 +1989,9 @@ do
 			then
 				echo -e "\n"
 				echo -E "=============================================================================="
-				read -p "Is the given command correct? - please check again! ${cmd[*]} [y]" answer
+				read -p "Is the given command correct? - please check again! ${cmd[*]} [n]" answer
 				echo -E "=============================================================================="
-				if [ "$answer" = "n" ]
+				if [ "$answer" = "y" ]
 				then
 					installer="${cmd[*]}" 
 				else
@@ -2020,9 +2018,9 @@ do
 			then
 				echo -e "\n"
 				echo -E "=============================================================================="
-				read -p "Is the given command correct? - please check again! ${cmd[*]} [y]" answer
+				read -p "Is the given command correct? - please check again! ${cmd[*]} [n]" answer
 				echo -E "=============================================================================="
-				if [ "$answer" = "n" ]
+				if [ "$answer" = "y" ]
 				then
 					installer="${cmd[*]}" 
 				else
