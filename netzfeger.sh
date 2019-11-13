@@ -657,13 +657,15 @@ function git_clone {
 	fi
 
 	if [ ! -d "$dir" ] 
-	then 
+	then
+		mkdir "$dir" 
+		source_dir=$dir
+		cd "$dir"
+	else
 		dir=$source_dir
 	fi
 
-	git clone $git_url "$dir"
-	cd "$dir"
-	source_dir=$dir
+	git clone $git_url "$source_dir"
 }
 
 
