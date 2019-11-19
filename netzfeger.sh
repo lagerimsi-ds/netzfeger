@@ -316,7 +316,7 @@ function remove_tempdir {
 	then
 		echo -e "\n"
 		echo -E "=============================================================================="
-		read -p "Do you want to remove the teporary directory and all its files? [n]" remove
+		read -p "Do you want to remove the teporary directory and all its files? [n] " remove
 		echo -E "=============================================================================="
 	fi
 	
@@ -531,7 +531,7 @@ function recover {
 
 		echo -e "\n"
 		echo -E "=============================================================================="
-		read -p "Which file do you want to recover? Enter the file number: [0]" number
+		read -p "Which file do you want to recover? Enter the file number: [0] " number
                 echo -E "=============================================================================="
 		
 		if ! [ ${#number} -gt 0 ]
@@ -651,7 +651,7 @@ function git_clone {
 	then
 		echo -e "\n"
 		echo -E "=============================================================================="
-		read -p "Please set the path to clone the git repository to. [$source_dir]" dir
+		read -p  -e "Please set the path to clone the git repository to. [$source_dir] " dir
 		echo -E "=============================================================================="
 		echo -e "\n"
 	fi
@@ -660,12 +660,11 @@ function git_clone {
 	then
 		mkdir "$dir" 
 		source_dir=$dir
-		cd "$dir"
 	else
 		dir=$source_dir
 	fi
 
-	git clone $git_url "$source_dir"
+	git clone $git_url "$dir"
 }
 
 
@@ -1099,7 +1098,7 @@ EOF
 		then
 			echo -e "\n"
 			echo -E "=============================================================================="
-			read -p  "Do you want to install a service that restarts unbound after all other services have been started on every boot? [y/n]" service_install
+			read -p  "Do you want to install a service that restarts unbound after all other services have been started on every boot? [y/n] " service_install
 			echo -E "=============================================================================="
 			echo -e "\n"
 
@@ -1933,7 +1932,7 @@ do
 			then
 				echo -e "\n"
 				echo -E "=============================================================================="
-				read -p "Is the given command correct? - please check again! ${cmd[*]} [n]" answer
+				read -p "Is the given command correct? - please check again! ${cmd[*]} [n] " answer
 				echo -E "=============================================================================="
 				if [ "$answer" = "y" ]
 				then
@@ -1962,7 +1961,7 @@ do
 			then
 				echo -e "\n"
 				echo -E "=============================================================================="
-				read -p "Is the given command correct? - please check again! ${cmd[*]} [n]" answer
+				read -p "Is the given command correct? - please check again! ${cmd[*]} [n] " answer
 				echo -E "=============================================================================="
 				if [ "$answer" = "y" ]
 				then
@@ -1991,7 +1990,7 @@ do
 			then
 				echo -e "\n"
 				echo -E "=============================================================================="
-				read -p "Is the given command correct? - please check again! ${cmd[*]} [n]" answer
+				read -p "Is the given command correct? - please check again! ${cmd[*]} [n] " answer
 				echo -E "=============================================================================="
 				if [ "$answer" = "y" ]
 				then
@@ -2020,7 +2019,7 @@ do
 			then
 				echo -e "\n"
 				echo -E "=============================================================================="
-				read -p "Is the given command correct? - please check again! ${cmd[*]} [n]" answer
+				read -p "Is the given command correct? - please check again! ${cmd[*]} [n] " answer
 				echo -E "=============================================================================="
 				if [ "$answer" = "y" ]
 				then
