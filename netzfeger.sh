@@ -132,7 +132,7 @@ port_pattern="^([0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2]
 
 # gathering the network for access control as server and ip for blacklist
 network=$(ip route show | grep "$(ip route show default | awk '{ print $5 }')" | grep -v default | awk '{ print $1 }')
-ip=$(ip address show | grep "$(echo "$network" | sed -E 's/\..{1,4}\/.{2,3}$//g')" | awk '{ print $2 }' | sed 's/\/.*$//g')
+ip=$(ip address show | grep "$(echo "$network" | sed -E 's/([[:digit:]]{1,3}|[[:xdigit:]]{1,4})\/[[:digit:]]{1,3}$//g')" | awk '{ print $2 }' | sed 's/\/.*$//g')
 unbound_version=$($packet_search unbound | tail -n1 | awk '{print $3}' | awk -F- '{print $1}')
 
 
