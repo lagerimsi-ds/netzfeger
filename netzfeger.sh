@@ -645,7 +645,6 @@ function recover_list {
 function git_clone {
 	
 	install_preq git
-		
 
 	if [ "$interactive" = "yes" ]
 	then
@@ -1714,7 +1713,6 @@ do
 				fi
 				shift
 			done
-			git_clone
 			install_unbound
 			sleep 15
 			install_webserver
