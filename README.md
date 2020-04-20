@@ -11,7 +11,7 @@ Therefor see the already available Options, which are still commented right now.
 Purpose is installing unbound as a local DNSSEC validating DNS cache with the possibility to maintain blacklists of suspicious sites,
 while it is using privacy respecting DNS forwarders in random order to serve you with a more private browsing experience.
 
-Local in this case can the local machine itself or a local DNS server on the internal network.
+Local in this case can be the local machine itself or a local DNS server on the internal network.
 
 Netzfeger allows you to maintain a blacklist and whitelist.
 Adding, removing, updating entries in the list and keeping care of backups and restore of those.
